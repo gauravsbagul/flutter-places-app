@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/greatPlaces.dart';
 import 'addPlaceScreen.dart';
 
 class PlacesListScreen extends StatelessWidget {
-  static const routeName = '/places-list';
-
+  final centerLoader = const Center(
+    child: const CircularProgressIndicator(),
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Places List'),
+        title: Text('Your Places'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
@@ -19,8 +22,32 @@ class PlacesListScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: CircularProgressIndicator(),
+      body: FutureBuilder(
+        future: Provider.of<GreatPlaces>(context, listen: false)
+            .fetchAndSetPlaces(),
+        builder: (ctx, snapshot) =>
+            snapshot.connectionState == ConnectionState.waiting
+                ? centerLoader
+                : Consumer<GreatPlaces>(
+                    child: centerLoader,
+                    builder: (ctx, greatPlaces, ch) {
+                      return greatPlaces.items.length <= 0
+                          ? ch
+                          : ListView.builder(
+                              itemCount: greatPlaces.items.length,
+                              itemBuilder: (ctx, i) => ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage: FileImage(
+                                    greatPlaces.items[i].image,
+                                  ),
+                                ),
+                                title: Text(greatPlaces.items[i].title),
+                                onTap: () {
+                                  // Go to detail page ...
+                                },
+                              ),
+                            );
+                    }),
       ),
     );
   }
