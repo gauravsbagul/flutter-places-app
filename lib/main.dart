@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/greatPlaces.dart';
+import 'screens/placeDetailsScreen.dart';
 import 'screens/placesListScreen.dart';
 import 'screens/addPlaceScreen.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         home: PlacesListScreen(),
         routes: {
           AddPlaceScreen.routeName: (ctx) => AddPlaceScreen(),
+          PlaceDetailsScreen.routeName: (ctx) => PlaceDetailsScreen(),
         },
       ),
     );

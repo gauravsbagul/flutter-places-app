@@ -9,11 +9,12 @@ class DBHelper {
     return await sql.openDatabase(path.join(dbPath, 'places.db'),
         onCreate: (db, version) {
       return db.execute(
-          'CREATE TABLE user_places(id TEXT PRIMARY KEY, title TEXT, image TEXT,loc_lat REAL loc_lng REAL, addresss TEXT)');
+          'CREATE TABLE user_places(id TEXT PRIMARY KEY, title TEXT, image TEXT,loc_lat REAL, loc_lng REAL, address TEXT)');
     }, version: 1);
   }
 
   static Future<void> insert(Map<String, Object> data) async {
+    print('DATA: ${data}');
     final db = await DBHelper.database();
 
     db.insert(

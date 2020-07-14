@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/greatPlaces.dart';
 import 'addPlaceScreen.dart';
+import 'placeDetailsScreen.dart';
 
 class PlacesListScreen extends StatelessWidget {
   final centerLoader = const Center(
@@ -36,18 +37,20 @@ class PlacesListScreen extends StatelessWidget {
                           : ListView.builder(
                               itemCount: greatPlaces.items.length,
                               itemBuilder: (ctx, i) => ListTile(
-                                leading: CircleAvatar(
-                                  backgroundImage: FileImage(
-                                    greatPlaces.items[i].image,
+                                  leading: Hero(
+                                    tag: greatPlaces.items[i].id,
+                                    child: CircleAvatar(
+                                      backgroundImage: FileImage(
+                                        greatPlaces.items[i].image,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                title: Text(greatPlaces.items[i].title),
-                                subtitle:
-                                    Text(greatPlaces.items[i].location.address),
-                                onTap: () {
-                                  // Go to detail page ...
-                                },
-                              ),
+                                  title: Text(greatPlaces.items[i].title),
+                                  subtitle: Text(greatPlaces.items[i].location
+                                      .address), //PlaceDetailsScreen
+                                  onTap: () => Navigator.of(context).pushNamed(
+                                      PlaceDetailsScreen.routeName,
+                                      arguments: greatPlaces.items[i].id)),
                             );
                     }),
       ),
