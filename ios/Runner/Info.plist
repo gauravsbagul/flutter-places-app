@@ -38,10 +38,9 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<!-- <key>io.flutter.embedded_views_preview</key>
+ 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
-	<key>MGLMapboxAccessToken</key>
-	<string>pk.eyJ1IjoiZ2F1cmF2c2JhZ3VsIiwiYSI6ImNrY2xocmtvdjIzNXAzNXBmNG9sMTJ6eG8ifQ.1FLviiqfjKvx2D32pNJgjw</string> -->
+	 
 	<key>UISupportedInterfaceOrientations</key>
 
 	<array>

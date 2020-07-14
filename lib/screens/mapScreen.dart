@@ -42,27 +42,24 @@ class _MapScreenState extends State<MapScreen> {
                     : null)
         ],
       ),
-      body: Center(
-        child: const CircularProgressIndicator(),
+      body: GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: LatLng(
+            widget.initialLocation.latitude,
+            widget.initialLocation.longitude,
+          ),
+          zoom: 16,
+        ),
+        onTap: widget.isSelection ? _selectLocation : null,
+        markers: _pickedLocation == null
+            ? null
+            : {
+                Marker(
+                  markerId: MarkerId('m1'),
+                  position: _pickedLocation,
+                )
+              },
       ),
-      // GoogleMap(
-      //   initialCameraPosition: CameraPosition(
-      //     target: LatLng(
-      //       widget.initialLocation.latitude,
-      //       widget.initialLocation.longitude,
-      //     ),
-      //     zoom: 16,
-      //   ),
-      //   onTap: widget.isSelection ? _selectLocation : null,
-      //   markers: _pickedLocation == null
-      //       ? null
-      //       : {
-      //           Marker(
-      //             markerId: MarkerId('m1'),
-      //             position: _pickedLocation,
-      //           )
-      //         },
-      // ),
     );
   }
 }
